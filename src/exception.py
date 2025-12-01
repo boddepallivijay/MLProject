@@ -7,7 +7,7 @@ def build_error_message(error: Exception, error_detail_module=sys) -> str:
     Return a readable error message with file and line of the original exception.
     Safe even if no traceback is present.
     """
-    exc_type, exc_obj, exc_tb = error_detail_module.exc_info()  # type: Optional[Tuple[Type[BaseException], BaseException, object]]
+    exc_type, exc_obj, exc_tb = error_detail_module.exc_info()  # ###type: Optional[Tuple[Type[BaseException], BaseException, object]]
     if exc_tb is None:
         # Fallback: no traceback available
         return f"{type(error).__name__}: {error}"
