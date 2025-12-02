@@ -209,3 +209,4 @@ __marimo__/
 
 logs/
 src/logs/
+catboost_info/ 

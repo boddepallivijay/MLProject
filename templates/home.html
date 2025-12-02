@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}Predict • Student Score Predictor{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card app-card">
+      <div class="card-body p-4 p-md-5">
+        <h1 class="h4 mb-4">Enter Details</h1>
+
+        {% if error %}
+          <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <form method="post" id="predictForm" novalidate>
+          <div class="row g-3">
+            <!-- Gender -->
+            <div class="col-md-6">
+              <label class="form-label" for="gender">Gender</label>
+              <select id="gender" name="gender" class="form-select" required>
+                <option value="" selected disabled>Select gender</option>
+                <option value="female">female</option>
+                <option value="male">male</option>
+              </select>
+            </div>
+
+            <!-- Race / Ethnicity -->
+            <div class="col-md-6">
+              <label class="form-label" for="ethnicity">Race / Ethnicity</label>
+              <select id="ethnicity" name="ethnicity" class="form-select" required>
+                <option value="" selected disabled>Select race / ethnicity</option>
+                <option value="group A">group A</option>
+                <option value="group B">group B</option>
+                <option value="group C">group C</option>
+                <option value="group D">group D</option>
+                <option value="group E">group E</option>
+              </select>
+            </div>
+
+            <!-- Parental education -->
+            <div class="col-md-12">
+              <label class="form-label" for="parentEdu">Parental level of education</label>
+              <select id="parentEdu" name="parental_level_of_education" class="form-select" required>
+                <option value="" selected disabled>Select education level</option>
+                <option value="some high school">some high school</option>
+                <option value="high school">high school</option>
+                <option value="some college">some college</option>
+                <option value="associate's degree">associate's degree</option>
+                <option value="bachelor's degree">bachelor's degree</option>
+                <option value="master's degree">master's degree</option>
+              </select>
+            </div>
+
+            <!-- Lunch -->
+            <div class="col-md-6">
+              <label class="form-label" for="lunch">Lunch</label>
+              <select id="lunch" name="lunch" class="form-select" required>
+                <option value="" selected disabled>Select lunch type</option>
+                <option value="standard">standard</option>
+                <option value="free/reduced">free/reduced</option>
+              </select>
+            </div>
+
+            <!-- Test prep -->
+            <div class="col-md-6">
+              <label class="form-label" for="prep">Test preparation course</label>
+              <select id="prep" name="test_preparation_course" class="form-select" required>
+                <option value="" selected disabled>Select course status</option>
+                <option value="none">none</option>
+                <option value="completed">completed</option>
+              </select>
+            </div>
+
+            <!-- Reading -->
+            <div class="col-md-6">
+              <label class="form-label" for="reading">Reading score</label>
+              <input id="reading" name="reading_score" type="number" min="0" max="100"
+                     step="1" class="form-control" placeholder="e.g., 72" required>
+              <small class="text-muted">0–100</small>
+            </div>
+
+            <!-- Writing -->
+            <div class="col-md-6">
+              <label class="form-label" for="writing">Writing score</label>
+              <input id="writing" name="writing_score" type="number" min="0" max="100"
+                     step="1" class="form-control" placeholder="e.g., 70" required>
+              <small class="text-muted">0–100</small>
+            </div>
+
+            <!-- Actions -->
+            <div class="col-12 pt-2 d-flex gap-2">
+              <button class="btn btn-primary btn-lg" type="submit">Predict</button>
+              <button class="btn btn-outline-secondary btn-lg" type="reset" id="resetBtn">Reset</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Result -->
+        <div id="resultBlock" class="mt-4 {% if results is none %}d-none{% endif %}">
+          <hr class="my-4">
+          <div class="alert alert-success mb-0">
+            <strong>Predicted Math Score:</strong>
+            {% if results is not none %}{{ "%.2f"|format(results) }}{% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- tiny helper script to hide result after Reset -->
+<script>
+  document.getElementById('resetBtn').addEventListener('click', function () {
+    const blk = document.getElementById('resultBlock');
+    if (blk) blk.classList.add('d-none');
+  });
+</script>
+{% endblock %}
