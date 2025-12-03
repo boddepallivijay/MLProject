@@ -1,18 +1,8 @@
-# ---- web app ----
+
 Flask==3.0.3
 gunicorn==21.2.0
-
-# ---- core ML/inference ----
 numpy==1.26.4
 pandas==2.1.4
 scikit-learn==1.4.2
-xgboost==2.0.3
 catboost==1.2.5
 dill==0.3.8
-
-# ---- optional (only if you want notebooks/plots) ----
-matplotlib==3.8.4
-seaborn==0.13.2
-# ---- optional (only if you want notebooks/plots) ----
-matplotlib==3.8.4
-seaborn==0.13.2
